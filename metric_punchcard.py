@@ -12,18 +12,17 @@ def main():
             time_calc = time_out - time_in
             calculated_times.append(time_calc)
             if len(calculated_times) == 14:
-                total_hours = sum(calculated_times)
+                total_hours = round(sum(calculated_times), 2)
                 clear
                 print('Total hours:', total_hours)
                 subtract_response = str(input('\nCalculate remaining time/overtime? '))
                 if subtract_response.startswith('y'):
-                    hours_to_go = total_hours - 40
-                    if hours_to_go < 0:
-                        print('Hours left: {}'.format(40 - total_hours))
-                    elif hours_to_go > 0:
-                        print('Overtime: {}'.format(hours_to_go))
-                    elif hours_to_go == 0:
-                        print('You have exactly 40 hours!')
+                    if total_hours < 80:
+                        print('Hours left: {}'.format(80 - total_hours))
+                    elif total_hours > 0:
+                        print('Overtime: {}'.format(total_hours - 80))
+                    elif total_hours == 0:
+                        print('You have exactly 80 hours!')
                     else:
                         print('There was an issue calculating your hours...')
                 elif subtract_response.startswith('n'):
