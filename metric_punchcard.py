@@ -1,6 +1,8 @@
 import os
+from datetime import date
 
-def main():
+
+def main(): # returns a list containing all calculated times
     calculated_times = []
     clear = os.system('clear')
     clear
@@ -36,6 +38,19 @@ def main():
         except Exception as err:
             clear
             print('There was an error (most likely a value error: {}'.format(err))
+    clear
+    return calculated_times
+
+def formatter(calculated_times):
+    try:
+        current_date = date.today()
+        total_hours = round(sum(calculated_times), 2)
+        write_data = "{}: total hours: {} {}".format(current_date, total_hours, calculated_times)
+        with open('workfile.txt', 'w') as f:
+            f.write(write_data)
+    except Exception as err:
+        print('Debug:', err)
 
 if __name__ == '__main__':
-    main()
+    times_list = main()
+    formatter(times_list)
